@@ -1,0 +1,19 @@
+To launch project:
+- install Python 3.5.2 - official site
+- upgrade pip:
+	- python -m pip install upgrade (be sure you are admin)
+	- if its not working go: https://bootstrap.pypa.io/get-pip.py
+- install packages:
+	- pip install -r requirements.txt
+- get yourself a database:
+	- PostgreSQL 9.6.1 (official site)
+	- default django settings for connections are postgres with postgres/postgres at port 5432
+	- if you have different postgre settings modify serwer settings.py
+- create database tables for this app:
+	- in root folder: python manage.py migrate
+	- after modyfing database model before migration run: python manage.py makemigrations
+- create superuser for your app:
+	- python manage.py createsuperuser
+- profit:
+	- to be seen localy: python manage.py 0.0.0.0:[port]
+	- to be seen only on your machine: python manage.py 127.0.0.1:[port]
