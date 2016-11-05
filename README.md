@@ -1,7 +1,7 @@
 To launch project:
 - install Python 3.5.2 - official site
 - upgrade pip:
-	- python -m pip install upgrade (be sure you are admin)
+	- python -m pip install --upgrade pip (be sure you are admin)
 	- if its not working go: https://bootstrap.pypa.io/get-pip.py
 - install packages:
 	- pip install -r requirements.txt
@@ -15,5 +15,5 @@ To launch project:
 - create superuser for your app:
 	- python manage.py createsuperuser
 - profit:
-	- to be seen localy: python manage.py 0.0.0.0:[port]
-	- to be seen only on your machine: python manage.py 127.0.0.1:[port]
+	- to be seen localy: python manage.py runserver 0.0.0.0:[port]
+	- to be seen only on your machine: python manage.py runserver 127.0.0.1:[port]

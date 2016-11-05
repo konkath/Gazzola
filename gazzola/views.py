@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 
+from gazzola.database_populater import populate
+
 
 def login_view(request):
     # If user is logged in already redirect to home
@@ -39,4 +41,10 @@ def logout_view(request):
 
 
 def index_view(request):
+    return render(request, 'index.html')
+
+
+@login_required
+def populate_database(request):
+    populate()
     return render(request, 'index.html')

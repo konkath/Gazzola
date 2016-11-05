@@ -11,17 +11,19 @@ class Address(models.Model):
     apt_number = models.CharField(max_length=4, null=True)
 
     def __str__(self):
+        addr = self.city + '(' + str(self.postal_code) + ') '
+        if self.street:
+            addr += self.street + ' '
+        addr += str(self.house_number)
         if self.apt_number:
-            return self.city + '(' + self.postal_code + ') ' + self.street + ' ' + self.house_number + '/' + \
-                   self.apt_number
-        return self.city + '(' + self.postal_code + ') ' + self.street + ' ' + self.house_number
+            addr += '/' + str(self.apt_number)
+        return addr
 
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=16)
     surname = models.CharField(max_length=64)
-    email = models.EmailField()
     reg_date = models.DateField()
     order_count = models.PositiveIntegerField()
     address = models.ManyToManyField(Address)
@@ -59,9 +61,19 @@ class Pizza(models.Model):
         return self.pizza_name
 
 
-class Storeroom(models.Model):
-    toppings = models.ForeignKey(Topping)
+class Storage(models.Model):
+    topping = models.ForeignKey(Topping)
     count = models.PositiveIntegerField(validators=[MaxValueValidator(999)])
+
+    def print_topping(self):
+        return self.topping.name + ' ' + str(self.count)
+
+    def __str__(self):
+        return self.print_topping()
+
+
+class Storeroom(models.Model):
+    storage = models.ManyToManyField(Storage)
 
     def __str__(self):
         return str(self.pk)
@@ -77,7 +89,7 @@ class Pizzeria(models.Model):
 
 
 class Promo(models.Model):
-    pizza = models.ForeignKey(Pizza)
+    pizza = models.ForeignKey(Pizza, null=True)
     discount = models.DecimalField(max_digits=5, decimal_places=2)
     valid_from = models.DateField()
     valid_to = models.DateField()

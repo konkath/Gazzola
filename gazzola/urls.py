@@ -18,5 +18,6 @@ from . import views
 
 app_name = 'gazzola'
 urlpatterns = [
+    url(r'^populate_database', views.populate_database, name='populate_database'),
     url(r'^$', views.index_view, name='index'),
 ]
