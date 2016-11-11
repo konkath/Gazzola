@@ -122,3 +122,20 @@ function addToCart() {
     });
 }
 
+function toggleCart() {
+    $("#cart").toggle();
+}
+
+function refreshCart() {
+
+    $.ajax({
+        type: 'GET',
+        url: '/ajax/get_basket_session/',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+        }
+
+    });
+}
+

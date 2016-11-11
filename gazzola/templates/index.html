@@ -15,6 +15,11 @@
     <script src='{% static "gazzola/js/jquery.ui.js" %}'></script>
     <script src='{% static "gazzola/js/bootstrap.min.js" %}'></script>
     <script src='{% static "gazzola/js/tomek.js" %}'></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            refreshCart();
+        })
+    </script>
 
     <!--[if lt IE 9]>
     <script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -42,6 +47,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
+                <li><a href="#" onclick="toggleCart();">Cart</a></li>
                 <li><a href="/logout">Logout</a></li>
                 {% else %}
                 <li><a href="/login">Login</a></li>
@@ -59,6 +65,23 @@
         {% endblock %}
     </div>
     <div class="col-md-3"></div>
+</div>
+
+<div id="cart" style="position:relative;min-width:960px; display: none;">
+    <div style="position: absolute;right:0;top:0">a
+        <table class="table">
+            <thead>
+            <tr>Pizza</tr>
+            <tr>Składniki</tr>
+            <tr>Cena</tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+
+        </table>
+    </div>
+
 </div>
 </body>
 </html>
