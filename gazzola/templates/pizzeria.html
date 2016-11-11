@@ -1,9 +1,11 @@
 {% extends "index.html" %}
 {% load mathfilters %}
 {% load humanize %}
+
 {% block main %}
 
 <div class="content">
+    {% csrf_token %}
     <section id="menu">
         <h1>MENU</h1>
         <div class="table-responsive">

@@ -104,6 +104,7 @@ function addToCart() {
     $(dialog).find("tr").each(function (index, entry) {
         var cells = $(entry).find("td");
         var number = $(cells)[1].innerHTML / 1;
+
         for (var i = 0; i < number; i++) {
             chosenToppings.push($(cells)[0].innerHTML);
         }
@@ -116,7 +117,7 @@ function addToCart() {
         data: {
             'pizza_name': pizza,
             'pizza_size': pizzaSize,
-            'toppings': chosenToppings,
+            'toppings': chosenToppings
         }
     });
 }
