@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^ajax/get_basket_session/&', ajax.get_basket_session),
 
     url(r'^$', views.index_view, name='index'),
+    url(r'^register', views.register_view, name='register'),
 ]

@@ -38,6 +38,11 @@ def pizzeria_view(request):
                                              'toppings': get_toppings_from_db()})
 
 
+def register_view(request):
+    return render(request, 'register.html')
+
+
+
 @login_required
 def logout_view(request):
     if request.user.is_authenticated():
