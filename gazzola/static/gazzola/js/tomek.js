@@ -139,6 +139,9 @@ function refreshCart() {
         url: '/ajax/get_basket_session/',
         dataType: 'json',
         success: function (data) {
+            if (data === null) {
+                location.href = "/";
+            }
             fillCart(data);
         }
     });

@@ -47,7 +47,7 @@ def get_pizzeria_session(request):
     if request.is_ajax and 'pizzeria' in request.session:
         pizzeria = request.session.get('pizzeria')
     else:
-        pizzeria = 'Gazzola Home'
+        pizzeria = None
         request.session['pizzeria'] = pizzeria
 
     return HttpResponse(json.dumps(pizzeria), content_type='application/json')
