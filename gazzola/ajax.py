@@ -1,7 +1,7 @@
 import json
-
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_protect
+from gazzola.database_helpers import count_pizza_price
 
 
 @csrf_protect
@@ -12,11 +12,14 @@ def save_basket_session(request):
         pizza_size = request.POST['pizza_size']
         pizza_toppings = request.POST.getlist('toppings[]')
 
+        price = count_pizza_price(pizza_name, pizza_toppings)
+        my_pizza = [pizza_name, pizza_size, pizza_toppings, str(price)]
+
         if 'cart' in request.session:
             cart = request.session['cart']
-            cart.append([pizza_name, pizza_size, pizza_toppings])
+            cart.append(my_pizza)
         else:
-            cart = [[pizza_name, pizza_size, pizza_toppings]]
+            cart = [my_pizza]
         request.session['cart'] = cart
 
     return HttpResponse(json.dumps(cart), content_type='application/json')
@@ -30,3 +33,21 @@ def get_basket_session(request):
         cart = request.session.get('cart')
 
     return HttpResponse(json.dumps(cart), content_type='application/json')
+
+
+@csrf_protect
+def set_pizzeria_session(request):
+    if request.is_ajax and request.POST:
+        request.session['pizzeria'] = request.POST['pizzeria_name']
+    return HttpResponse(content_type='application/json')
+
+
+@csrf_protect
+def get_pizzeria_session(request):
+    if request.is_ajax and 'pizzeria' in request.session:
+        pizzeria = request.session.get('pizzeria')
+    else:
+        pizzeria = 'Gazzola Home'
+        request.session['pizzeria'] = pizzeria
+
+    return HttpResponse(json.dumps(pizzeria), content_type='application/json')

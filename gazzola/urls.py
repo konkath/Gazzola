@@ -27,6 +27,8 @@ urlpatterns = [
     # Ajax
     url(r'^ajax/save_basket_session/', ajax.save_basket_session),
     url(r'^ajax/get_basket_session/', ajax.get_basket_session),
+    url(r'^ajax/get_pizzeria_session/', ajax.get_pizzeria_session),
+    url(r'^ajax/set_pizzeria_session/', ajax.set_pizzeria_session),
 
     url(r'^$', views.index_view, name='index'),
 ]
