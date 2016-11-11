@@ -85,15 +85,17 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <input type="submit" value="SUBMIT" class="btn btn-primary"/>
-                    </div>
+                <div class="span7 text-center">
+                    <input type="submit" value="Zarejestruj" class="btn btn-primary"/>
                 </div>
 
             </fieldset>
         </form>
-
+        {% if register_status == 1 %}
+        Zarejestrowany
+        {% elif register_status == 0%}
+        Niezarejestrowany
+        {% endif %}
     </section>
 </div>
 {% endblock %}
