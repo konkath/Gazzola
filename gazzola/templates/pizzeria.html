@@ -2,6 +2,7 @@
 {% load mathfilters %}
 {% load humanize %}
 {% block main %}
+
 <div class="content">
     <section id="menu">
         <h1>MENU</h1>
@@ -18,16 +19,16 @@
                 </thead>
                 <tbody>
                 {% for pizza in pizzas %}
-                <tr>
+                <tr id="{{pizza}}">
                     <td>{{ pizza.pizza_name }}</td>
-                    <td>
+                    <td class="topping-list">
                         {% for topping in pizza.toppings.all %}
                         {{ topping.name }}{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </td>
-                    <td>{{ pizza.price|mul:0.75|floatformat:2 }}</td>
-                    <td>{{ pizza.price }}</td>
-                    <td>{{ pizza.price|mul:1.25|floatformat:2 }}</td>
+                    <td onclick="addSmall('{{pizza}}')">{{ pizza.price|mul:0.75|floatformat:2 }}</td>
+                    <td onclick="addNormal('{{pizza}}')">{{ pizza.price }}</td>
+                    <td onclick="addBig('{{pizza}}')">{{ pizza.price|mul:1.25|floatformat:2 }}</td>
                 </tr>
                 {% endfor %}
 
@@ -36,4 +37,23 @@
         </div>
     </section>
 </div>
+
+
+<div style="display:none;" id="toppingsDialog" title="Wybierz dodatki">
+    <table class="table">
+        {% for topping in toppings %}
+        <tr>
+            <td class="topping-name">{{topping.name}}</td>
+            <td>0</td>
+            <td onclick="addTopping(this)">+</td>
+            <td onclick="removeTopping(this)">-</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <input type="button" value="Dodaj do koszyka" onclick="addToCart();">
+
+</div>
+
+
 {% endblock %}
