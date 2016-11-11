@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 
+from gazzola.database_getters import get_pizzas_from_db
 from gazzola.database_populater import populate
 
 
@@ -30,6 +31,10 @@ def login_view(request):
             return render(request, 'login.html', {'object': 'Your credentials are invalid'})
 
     return render(request, 'login.html')
+
+
+def pizzeria_view(request):
+    return render(request, 'pizzeria.html', {'pizzas', get_pizzas_from_db()})
 
 
 @login_required
