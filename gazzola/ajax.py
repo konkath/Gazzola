@@ -12,8 +12,8 @@ def save_basket_session(request):
         pizza_size = request.POST['pizza_size']
         pizza_toppings = request.POST.getlist('toppings[]')
 
-        cart = request.session.get['cart']
-        if cart:
+        if 'cart' in request.session:
+            cart = request.session['cart']
             cart.append([pizza_name, pizza_size, pizza_toppings])
         else:
             cart = [[pizza_name, pizza_size, pizza_toppings]]
