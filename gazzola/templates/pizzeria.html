@@ -20,8 +20,8 @@
                 <tr>
                     <td>{{ pizza.pizza_name }}</td>
                     <td>
-                        {% for topping in pizza.toppings %}
-                        {{ topping.name }}({{ topping.price }})
+                        {% for topping in pizza.toppings.all %}
+                        {{ topping.name }},
                         {% endfor %}
                     </td>
                     <td>{{ pizza.price|mul:0.75 }}</td>
