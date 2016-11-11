@@ -1,23 +1,38 @@
 {% extends "index.html" %}
-
+{% load mathfilters %}
 {% block main %}
-    <div class="content">
-        <section id="menu">
-            <h1>MENU</h1>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Pizza</th>
-                        <th>Składniki</th>
-                        <th>Mała</th>
-                        <th>Średnia</th>
-                        <th>Duża</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
-    </div>
+<div class="content">
+    <section id="menu">
+        <h1>MENU</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Pizza</th>
+                    <th>Składniki</th>
+                    <th>Mała</th>
+                    <th>Średnia</th>
+                    <th>Duża</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pizza in pizzas %}
+                <tr>
+                    <td>{{ pizza.pizza_name }}</td>
+                    <td>
+                        {% for topping in pizza.toppings %}
+                        {{ topping.name }}({{ topping.price }})
+                        {% endfor %}
+                    </td>
+                    <td>{{ pizza.price|mul:0.75 }}</td>
+                    <td>{{ pizza.price }}</td>
+                    <td>{{ pizza.price|mul:1.25 }}</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
 {% endblock %}
