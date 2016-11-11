@@ -99,7 +99,7 @@ class Promo(models.Model):
 
 
 class OrderedPizza(models.Model):
-    pizza = models.ForeignKey(Pizza)
+    toppings = models.ManyToManyField(Topping)
     size = models.PositiveIntegerField(validators=[MaxValueValidator(4)])
 
     def __str__(self):

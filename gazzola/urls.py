@@ -14,11 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+
+from gazzola import ajax
 from . import views
 
 app_name = 'gazzola'
 urlpatterns = [
     url(r'^populate_database', views.populate_database, name='populate_database'),
     url(r'^pizzeria', views.pizzeria_view, name='pizzeria'),
+
+    # Ajax
+    url(r'^ajax/save_basket_session/&', ajax.save_basket_session, name='save_basket'),
+    url(r'^ajax/get_basket_session/&', ajax.get_basket_session, name='get_basket'),
+
     url(r'^$', views.index_view, name='index'),
 ]
