@@ -38,8 +38,12 @@ def login_view(request):
 
 
 def pizzeria_view(request):
-    return render(request, 'pizzeria.html', {'pizzas': get_pizza_with_real_price(),
+
+    if request.is_ajax and 'pizzeria' in request.session:
+        return render(request, 'pizzeria.html', {'pizzas': get_pizza_with_real_price(),
                                              'toppings': get_toppings_from_db()})
+    else:
+        return HttpResponseRedirect('/')
 
 
 def register_view(request):
