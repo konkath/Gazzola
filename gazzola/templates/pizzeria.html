@@ -1,5 +1,6 @@
 {% extends "index.html" %}
 {% load mathfilters %}
+{% load humanize %}
 {% block main %}
 <div class="content">
     <section id="menu">
@@ -21,12 +22,12 @@
                     <td>{{ pizza.pizza_name }}</td>
                     <td>
                         {% for topping in pizza.toppings.all %}
-                        {{ topping.name }},
+                        {{ topping.name }}{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </td>
-                    <td>{{ pizza.price|mul:0.75 }}</td>
+                    <td>{{ pizza.price|mul:0.75|floatformat:2 }}</td>
                     <td>{{ pizza.price }}</td>
-                    <td>{{ pizza.price|mul:1.25 }}</td>
+                    <td>{{ pizza.price|mul:1.25|floatformat:2 }}</td>
                 </tr>
                 {% endfor %}
 
