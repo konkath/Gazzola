@@ -1,37 +1,3 @@
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');
-
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-function sameOrigin(url) {
-    // test that a given url is a same-origin URL
-    // url could be relative or scheme relative or absolute
-    var host = document.location.host; // host + port
-    var protocol = document.location.protocol;
-    var sr_origin = '//' + host;
-    var origin = protocol + sr_origin;
-    // Allow absolute or scheme relative URLs to same origin
-    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-        // or any other URL that isn't scheme relative or absolute i.e relative.
-        !(/^(\/\/|http:|https:).*/.test(url));
-}
 $.ajaxSetup({
     beforeSend: function (xhr, settings) {
         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
@@ -118,12 +84,52 @@ function addToCart() {
             'pizza_name': pizza,
             'pizza_size': pizzaSize,
             'toppings': chosenToppings
+        },
+        success: function (data) {
+            $("#cart").find("tbody tr").remove();
+            fillCart(data);
         }
     });
 }
 
 function toggleCart() {
     $("#cart").toggle();
+}
+
+function sizeToText(size) {
+
+    switch (size) {
+        case "1":
+            return "mała";
+        case "2":
+            return "średnia";
+        case "3":
+            return "duża";
+    }
+}
+
+function fillCart(data) {
+
+    var table = document.getElementById("cart").getElementsByTagName("tbody")[0];
+    table.set
+    var price = 0;
+    console.log(data);
+
+    $(data).each(function (index, item) {
+        console.log(item);
+        var row = table.insertRow(table.rows.length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+
+        cell1.innerHTML = item[0];
+        cell2.innerHTML = sizeToText(item[1]);
+        cell3.innerHTML = item[3];
+
+        price += item[3] / 1;
+    });
+    console.log(price);
+    $("#total-price").text(price + " zł");
 }
 
 function refreshCart() {
@@ -133,9 +139,8 @@ function refreshCart() {
         url: '/ajax/get_basket_session/',
         dataType: 'json',
         success: function (data) {
-            console.log(data);
+            fillCart(data);
         }
-
     });
 }
 

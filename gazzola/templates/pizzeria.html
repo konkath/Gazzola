@@ -47,7 +47,7 @@
     </section>
 </div>
 
-
+<!-- Okno dialogowe wyboru dodatków -->
 <div style="display:none;" id="toppingsDialog" title="Wybierz dodatki">
     <table class="table">
         {% for topping in toppings %}
@@ -59,10 +59,25 @@
         </tr>
         {% endfor %}
     </table>
-
     <input type="button" value="Dodaj do koszyka" onclick="addToCart();">
-
 </div>
+{% endblock %}
 
+<!-- Okno koszyka -->
+{% block cart %}
+<div class="table-responsive" style="position:fixed; margin-top: 70px;">
+    <table id="cart" class="table">
+        <thead>
+        <tr>
+            <th>Pizza</th>
+            <th>Wielkość</th>
+            <th>Cena</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
 
+    </table>
+    Razem: <span id="total-price"></span><br/>
+    <a href="/place-order">Zamawiam</a>
+</div>
 {% endblock %}
