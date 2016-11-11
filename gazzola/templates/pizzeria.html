@@ -2,8 +2,15 @@
 {% load mathfilters %}
 {% load humanize %}
 
-{% block main %}
+{% block headscript %}
+<script>
+    $(document).ready(function () {
+        refreshCart();
+    })
+</script>
+{% endblock %}
 
+{% block main %}
 <div class="content">
     {% csrf_token %}
     <section id="menu">
