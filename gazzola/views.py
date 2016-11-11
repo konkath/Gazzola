@@ -34,7 +34,7 @@ def login_view(request):
 
 
 def pizzeria_view(request):
-    return render(request, 'pizzeria.html', {'pizzas', get_pizzas_from_db()})
+    return render(request, 'pizzeria.html', {'pizzas': get_pizzas_from_db()})
 
 
 @login_required
