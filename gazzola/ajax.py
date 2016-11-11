@@ -1,5 +1,4 @@
 import json
-import logging
 
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_protect
@@ -29,6 +28,5 @@ def get_basket_session(request):
 
     if request.is_ajax() and 'cart' in request.session:
         cart = request.session.get('cart')
-        logging.debug(cart)
 
     return HttpResponse(json.dumps(cart), content_type='application/json')

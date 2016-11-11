@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
@@ -5,6 +7,7 @@ from django.shortcuts import render
 
 from gazzola.database_getters import get_pizzas_from_db, get_toppings_from_db
 from gazzola.database_populater import populate
+from gazzola.database_setters import create_customer
 
 
 def login_view(request):
@@ -39,8 +42,25 @@ def pizzeria_view(request):
 
 
 def register_view(request):
-    return render(request, 'register.html')
+    if request.POST:
+        logging.debug(request.POST)
+        name = request.POST['name']
+        surname = request.POST['surname']
+        email = request.POST['email']
+        password = request.POST['password']
+        city = request.POST['city']
+        house_number = request.POST['house_number']
+        postal_code = request.POST['postal_code']
+        street = request.POST['street']
+        apt_number = request.POST['apt_number']
 
+        customer = create_customer(name, surname, email, password, city, house_number, street, postal_code, apt_number)
+
+        if customer:
+            return render(request, 'register.html', {'register_status': 1})
+        return render(request, 'register.html', {'register_status': 0})
+
+    return render(request, 'register.html')
 
 
 @login_required
