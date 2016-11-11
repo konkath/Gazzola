@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 
-from gazzola.database_getters import get_pizzas_from_db, get_toppings_from_db
+from gazzola.database_getters import get_toppings_from_db
+from gazzola.database_helpers import get_pizza_with_real_price
 from gazzola.database_populater import populate
 from gazzola.database_setters import create_customer
 
@@ -37,7 +38,7 @@ def login_view(request):
 
 
 def pizzeria_view(request):
-    return render(request, 'pizzeria.html', {'pizzas': get_pizzas_from_db(),
+    return render(request, 'pizzeria.html', {'pizzas': get_pizza_with_real_price(),
                                              'toppings': get_toppings_from_db()})
 
 
