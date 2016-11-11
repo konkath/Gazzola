@@ -10,7 +10,7 @@ def save_basket_session(request):
     if request.is_ajax() and request.POST:
         pizza_name = request.POST['pizza_name']
         pizza_size = request.POST['pizza_size']
-        pizza_toppings = request.POST.getlist('toppings')
+        pizza_toppings = request.POST.getlist('toppings[]')
 
         cart = request.session.get['cart']
         if cart:
