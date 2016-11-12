@@ -2,12 +2,13 @@
 {% load mathfilters %}
 {% block main %}
 <div class="content">
+    {% csrf_token %}
     <div class="table-responsive">
         <table class="table">
             <tbody>
             <tr>
                 {% for pizzeria in pizzerias %}
-                <td>{{ pizzeria }}</td>
+                <td onclick="choosePizzeria('{{pizzeria}}');">{{ pizzeria }}</td>
                 {% if forloop.counter|divisibleby:5 %}
             </tr>
             <tr>{% endif %}

@@ -39,7 +39,7 @@ def get_basket_session(request):
 def set_pizzeria_session(request):
     if request.is_ajax and request.POST:
         request.session['pizzeria'] = request.POST['pizzeria_name']
-    return HttpResponse(content_type='application/json')
+    return HttpResponse("SUCCESS")
 
 
 @csrf_protect

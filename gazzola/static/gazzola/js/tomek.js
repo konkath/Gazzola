@@ -111,12 +111,10 @@ function sizeToText(size) {
 function fillCart(data) {
 
     var table = document.getElementById("cart").getElementsByTagName("tbody")[0];
-    table.set
     var price = 0;
-    console.log(data);
 
     $(data).each(function (index, item) {
-        console.log(item);
+
         var row = table.insertRow(table.rows.length);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -139,10 +137,33 @@ function refreshCart() {
         url: '/ajax/get_basket_session/',
         dataType: 'json',
         success: function (data) {
-            if (data === null) {
-                location.href = "/";
-            }
             fillCart(data);
+        }
+    });
+}
+
+function clearCart() {
+
+    $.ajax({
+        type: 'GET',
+        url: '/ajax/delete_basket_session/',
+        success: function () {
+            document.getElementById("cart").getElementsByTagName("tbody")[0].innerHTML = "";
+        }
+    });
+}
+
+function choosePizzeria(pizzeriaName) {
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajax/set_pizzeria_session/',
+        data: {
+            'pizzeria_name': pizzeriaName
+        },
+        success: function (data) {
+            console.log(data);
+            location.href = "/pizzeria";
         }
     });
 }
