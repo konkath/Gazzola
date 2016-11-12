@@ -1,5 +1,51 @@
 {% extends "base.html" %}
 
 {% block main %}
+<div class="content">
+    {% csrf_token %}
+    <form class="form-horizontal" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Składanie zamówienia</legend>
 
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="delivery_type">Sposób dostawy</label>
+                <div class="col-md-4" id="delivery_type">
+                    <label class="radio-inline" for="delivery_type-0">
+                        <input type="radio" name="delivery_type" id="delivery_type-0" value="delivery" checked="">
+                        Dostawa
+                    </label>
+                    <label class="radio-inline" for="delivery_type-1">
+                        <input type="radio" name="delivery_type" id="delivery_type-1" value="takeout">
+                        Odbiór w lokalu
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="address">Adres dostawy</label>
+                <div class="col-md-4">
+                    <select id="address" name="address" class="form-control">
+                        {% for address in addresses %}
+                        <option value="{{address.id}}"> {{ address }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="additional_info">Komentarz</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" id="additional_info" name="additional_info" style="resize: none"></textarea>
+                </div>
+            </div>
+
+            <div class="span7 text-center">
+                <input type="submit" value="Złóż zamówienie" class="btn btn-primary"/>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
 {% endblock %}

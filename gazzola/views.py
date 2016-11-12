@@ -41,20 +41,21 @@ def login_view(request):
 def pizzeria_view(request):
     if 'pizzeria' in request.session:
         return render(request, 'pizzeria.html', {'pizzas': get_pizza_with_real_price(),
-                      'toppings': get_toppings_from_db()})
+                                                 'toppings': get_toppings_from_db()})
     else:
         return HttpResponseRedirect('/')
 
 
 def index_content_view(request):
     pizzeria_names = get_pizzeria_names()
-    return render(request, '/', {'pizzerias': pizzeria_names,
-                                 'pizzerias_count': len(pizzeria_names)})
+    return render(request, 'index.html', {'pizzerias': pizzeria_names,
+                                          'pizzerias_count': len(pizzeria_names)})
 
 
 @login_required
 def place_order_view(request):
     if 'pizzeria' in request.session:
+        logging.debug(get_address_for_user(request.user))
         return render(request, 'order.html', {'addresses': get_address_for_user(request.user)})
     else:
         return HttpResponseRedirect('/')
