@@ -47,7 +47,7 @@ def pizzeria_view(request):
 
 def index_content_view(request):
     pizzeria_names = get_pizzeria_names()
-    return render(request, 'index_content.html', {'pizzeria': pizzeria_names,
+    return render(request, 'index_content.html', {'pizzerias': pizzeria_names,
                                                   'pizzerias_count': len(pizzeria_names)})
 
 

@@ -1,19 +1,16 @@
 {% extends "index.html" %}
+{% load mathfilters %}
 {% block main %}
 <div class="content">
     <div class="table-responsive">
         <table class="table">
             <tbody>
-            <tr id="pizzerias">
-                 {% for pizzeria in pizzerias %}
-                <td>{{ pizzeria.name }}</td>
-                <!-- przyjąć np 5 pizzerii w rządku wtedy
-                 for(int i = 0; i < pizzerias_count / 5; i++) {
-                 <tr>
-                    for(int j = 0; j < 5; j++)
-                        <td>{{ pizzeria.name }}</td>
-                 </tr>
-                 -->
+            <tr>
+                {% for pizzeria in pizzerias %}
+                <td>{{ pizzeria }}</td>
+                {% if forloop.counter|divisibleby:5 %}
+            </tr>
+            <tr>{% endif %}
                 {% endfor %}
             </tr>
             </tbody>
