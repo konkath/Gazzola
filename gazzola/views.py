@@ -6,7 +6,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 
 from gazzola.database_getters import get_toppings_from_db
-from gazzola.database_helpers import get_pizza_with_real_price, get_pizzeria_names
+from gazzola.database_helpers import get_pizza_with_real_price, get_pizzeria_names, get_order_history_for_user
 from gazzola.database_populater import populate
 from gazzola.database_setters import create_customer
 
@@ -79,6 +79,12 @@ def register_view(request):
         return render(request, 'register.html', {'register_status': 0})
 
     return render(request, 'register.html')
+
+
+@login_required
+def user_panel_view(request):
+    logging.debug(request.user)
+    return render(request, 'user_panel.html', {'order_history': get_order_history_for_user(request.user)})
 
 
 @login_required

@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^register', views.register_view, name='register'),
     url(r'^place_order', views.place_order_view, name='place_order'),
     url(r'^main_content', views.index_content_view, name='main_content'),
+    url(r'^user_panel', views.user_panel_view, name='user_panel'),
 
     # Ajax
     url(r'^ajax/save_basket_session/', ajax.save_basket_session),
