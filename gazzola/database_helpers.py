@@ -1,4 +1,4 @@
-from gazzola.database_getters import get_topping_from_db, get_pizza_from_db, get_pizzas_from_db
+from gazzola.database_getters import get_topping_from_db, get_pizza_from_db, get_pizzas_from_db, get_pizzerias_from_db
 
 
 def count_pizza_price(pizza_name, pizza_toppings):
@@ -39,3 +39,12 @@ def get_pizza_with_real_price():
         real_pizzas.append(RealPizza(pizza))
 
     return real_pizzas
+
+
+def get_pizzeria_names():
+    pizzerias_db = get_pizzerias_from_db()
+
+    names = []
+    for pizzeria in pizzerias_db:
+        names.append(pizzeria.name)
+    return names

@@ -1,4 +1,4 @@
-from gazzola.models import Pizza, Topping
+from gazzola.models import Pizza, Topping, Pizzeria
 
 
 def get_pizzas_from_db():
@@ -7,6 +7,10 @@ def get_pizzas_from_db():
 
 def get_toppings_from_db():
     return Topping.objects.all()
+
+
+def get_pizzerias_from_db():
+    return Pizzeria.objects.all()
 
 
 def get_topping_from_db(name):

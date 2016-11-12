@@ -23,12 +23,15 @@ urlpatterns = [
     url(r'^populate_database', views.populate_database, name='populate_database'),
     url(r'^pizzeria', views.pizzeria_view, name='pizzeria'),
     url(r'^register', views.register_view, name='register'),
+    url(r'^place_order', views.place_order_view, name='place_order'),
+    url(r'^main_content', views.index_content_view, name='main_content'),
 
     # Ajax
     url(r'^ajax/save_basket_session/', ajax.save_basket_session),
     url(r'^ajax/get_basket_session/', ajax.get_basket_session),
     url(r'^ajax/get_pizzeria_session/', ajax.get_pizzeria_session),
     url(r'^ajax/set_pizzeria_session/', ajax.set_pizzeria_session),
+    url(r'^ajax/delete_basket_session/', ajax.delete_basket_session),
 
     url(r'^$', views.index_view, name='index'),
 ]

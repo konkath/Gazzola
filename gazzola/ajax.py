@@ -48,6 +48,11 @@ def get_pizzeria_session(request):
         pizzeria = request.session.get('pizzeria')
     else:
         pizzeria = None
-        request.session['pizzeria'] = pizzeria
 
     return HttpResponse(json.dumps(pizzeria), content_type='application/json')
+
+
+def delete_basket_session(request):
+    if request.is_ajax and 'cart' in request.session:
+        del request.session['cart']
+    return HttpResponse(content_type='application/json')
