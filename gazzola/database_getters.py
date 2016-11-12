@@ -30,7 +30,7 @@ def get_pizza_from_db(name):
 
 
 def get_customer_for_user_from_db(user):
-    customer_db = Customer(user=user)
+    customer_db = Customer.objects.filter(user=user)
 
     if customer_db:
         return customer_db
@@ -38,7 +38,7 @@ def get_customer_for_user_from_db(user):
 
 
 def get_orders_for_customer_from_db(customer):
-    order_db = Order(customer=customer)
+    order_db = Order.objects.filter(customer=customer)
 
     if order_db:
         return order_db
@@ -46,7 +46,7 @@ def get_orders_for_customer_from_db(customer):
 
 
 def get_addresses_for_customer_from_db(customer):
-    address = Address(customer=customer)
+    address = Address.objects.filter(customer=customer)
 
     if address:
         return address
