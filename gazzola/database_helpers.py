@@ -1,5 +1,5 @@
 from gazzola.database_getters import get_topping_from_db, get_pizza_from_db, get_pizzas_from_db, get_pizzerias_from_db, \
-    get_customer_for_user_from_db, get_orders_for_customer_from_db
+    get_customer_for_user_from_db, get_orders_for_customer_from_db, get_addresses_for_customer_from_db
 
 
 def count_pizza_price(pizza_name, pizza_toppings):
@@ -56,4 +56,12 @@ def get_order_history_for_user(user):
 
     if customer:
         return get_orders_for_customer_from_db(customer)
+    return None
+
+
+def get_address_for_user(user):
+    customer = get_customer_for_user_from_db(user)
+
+    if customer:
+        return get_addresses_for_customer_from_db(customer)
     return None

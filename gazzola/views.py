@@ -6,7 +6,8 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 
 from gazzola.database_getters import get_toppings_from_db
-from gazzola.database_helpers import get_pizza_with_real_price, get_pizzeria_names, get_order_history_for_user
+from gazzola.database_helpers import get_pizza_with_real_price, get_pizzeria_names, get_order_history_for_user, \
+    get_address_for_user
 from gazzola.database_populater import populate
 from gazzola.database_setters import create_customer
 
@@ -48,13 +49,13 @@ def pizzeria_view(request):
 def index_content_view(request):
     pizzeria_names = get_pizzeria_names()
     return render(request, '/', {'pizzerias': pizzeria_names,
-                                          'pizzerias_count': len(pizzeria_names)})
+                                 'pizzerias_count': len(pizzeria_names)})
 
 
 @login_required
 def place_order_view(request):
     if 'pizzeria' in request.session:
-        return render(request, 'order.html')
+        return render(request, 'order.html', {'addresses': get_address_for_user(request.user)})
     else:
         return HttpResponseRedirect('/')
 
