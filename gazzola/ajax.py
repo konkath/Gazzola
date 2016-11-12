@@ -39,7 +39,7 @@ def get_basket_session(request):
 def set_pizzeria_session(request):
     if request.is_ajax and request.POST:
         request.session['pizzeria'] = request.POST['pizzeria_name']
-    return HttpResponse("SUCCESS")
+    return HttpResponse(content_type='application/json')
 
 
 @csrf_protect
@@ -55,4 +55,4 @@ def get_pizzeria_session(request):
 def delete_basket_session(request):
     if request.is_ajax and 'cart' in request.session:
         del request.session['cart']
-    return HttpResponse(content_type='application/json')
+    return HttpResponse(json.dumps("SUCCESS"), content_type='application/json')

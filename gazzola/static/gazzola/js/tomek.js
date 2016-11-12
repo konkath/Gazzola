@@ -37,6 +37,7 @@ function addBig(pizza) {
 }
 
 function refreshToppingsDialog(pizza) {
+
     var currentToppings = "" + $("#" + pizza).find(".topping-list").html().replace(/\s /g, '');
 
     $(".topping-name").each(function (index, entry) {

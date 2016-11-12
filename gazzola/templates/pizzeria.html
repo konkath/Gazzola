@@ -28,16 +28,16 @@
                 </thead>
                 <tbody>
                 {% for pizza in pizzas %}
-                <tr id="{{pizza}}">
+                <tr id="{{pizza.pizza_name}}">
                     <td>{{ pizza.pizza_name }}</td>
                     <td class="topping-list">
                         {% for topping in pizza.toppings.all %}
                         {{ topping.name }}{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </td>
-                    <td onclick="addSmall('{{pizza}}')">{{ pizza.price|mul:0.75|floatformat:2 }}</td>
-                    <td onclick="addNormal('{{pizza}}')">{{ pizza.price }}</td>
-                    <td onclick="addBig('{{pizza}}')">{{ pizza.price|mul:1.25|floatformat:2 }}</td>
+                    <td onclick="addSmall('{{pizza.pizza_name}}')">{{ pizza.price|mul:0.75|floatformat:2 }}</td>
+                    <td onclick="addNormal('{{pizza.pizza_name}}')">{{ pizza.price }}</td>
+                    <td onclick="addBig('{{pizza.pizza_name}}')">{{ pizza.price|mul:1.25|floatformat:2 }}</td>
                 </tr>
                 {% endfor %}
 
