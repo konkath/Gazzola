@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gazzola</title>
+
+    {% load static %}
+
+    <link href='{% static "gazzola/css/bootstrap.min.css" %}' rel="stylesheet">
+    <link href='{% static "gazzola/css/freelancer.css" %}' rel="stylesheet">
+    <link href='{% static "gazzola/css/jquery-ui.min.css" %}' rel="stylesheet">
+    <script src='{% static "gazzola/js/jquery.js" %}'></script>
+    <script src='{% static "gazzola/js/jquery.ui.js" %}'></script>
+    <script src='{% static "gazzola/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "gazzola/js/tomek.js" %}'></script>
+
+
+    <!--[if lt IE 9]>
+    <script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    {% block headscript %}
+
+    {% endblock %}
+
+</head>
+<body>
+<nav class="navbar navbar-inverse ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Home</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li><a href="#" onclick="toggleCart();">Cart</a></li>
+                <li><a href="/logout">Logout</a></li>
+                {% else %}
+                <li><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="main">
+    <div class="col-md-3">
+        {% block cart %}
+
+        {% endblock %}
+    </div>
+    <div class="col-md-6">
+        {% block main %}
+
+        {% endblock %}
+    </div>
+    <div class="col-md-3"></div>
+</div>
+</body>
+</html>

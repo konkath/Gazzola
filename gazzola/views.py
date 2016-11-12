@@ -47,8 +47,8 @@ def pizzeria_view(request):
 
 def index_content_view(request):
     pizzeria_names = get_pizzeria_names()
-    return render(request, 'index_content.html', {'pizzerias': pizzeria_names,
-                                                  'pizzerias_count': len(pizzeria_names)})
+    return render(request, '/', {'pizzerias': pizzeria_names,
+                                          'pizzerias_count': len(pizzeria_names)})
 
 
 @login_required
@@ -95,10 +95,7 @@ def logout_view(request):
     return HttpResponseRedirect('/')
 
 
-def index_view(request):
-    return render(request, 'index.html')
-
-
+# Debug purpose
 @login_required
 def populate_database(request):
     populate()

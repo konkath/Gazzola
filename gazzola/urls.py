@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^pizzeria', views.pizzeria_view, name='pizzeria'),
     url(r'^register', views.register_view, name='register'),
     url(r'^place_order', views.place_order_view, name='place_order'),
-    url(r'^main_content', views.index_content_view, name='main_content'),
     url(r'^user_panel', views.user_panel_view, name='user_panel'),
 
     # Ajax
@@ -34,5 +33,5 @@ urlpatterns = [
     url(r'^ajax/set_pizzeria_session/', ajax.set_pizzeria_session),
     url(r'^ajax/delete_basket_session/', ajax.delete_basket_session),
 
-    url(r'^$', views.index_view, name='index'),
+    url(r'^$', views.index_content_view, name='index'),
 ]
