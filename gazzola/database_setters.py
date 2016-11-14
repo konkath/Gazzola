@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.contrib.auth.models import User
-from gazzola.models import Customer, Address
+from gazzola.models import Customer, Address, OrderedPizza, Order
 
 
 def create_customer(name, surname, email, password, city, house_number, street, postal_code, apt_number):
@@ -32,3 +32,23 @@ def create_user(email, password):
 
         return user
     return None
+
+
+def create_ordered_pizza(pizza_name, pizza_size, pizza_toppings):
+    ordered_pizza = OrderedPizza(pizza_name=pizza_name, size=pizza_size)
+    ordered_pizza.save()
+
+    for topping in pizza_toppings:
+        ordered_pizza.toppings.add(topping)
+
+    return ordered_pizza
+
+
+def create_order(customer, pizzas, address, additional_info):
+    order = Order(customer=customer, address=address, additional_info=additional_info, order_date=datetime.now())
+    order.save()
+
+    for pizza in pizzas:
+        order.pizzas.add(pizza)
+
+    return order

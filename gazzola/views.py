@@ -1,4 +1,5 @@
 import logging
+from random import randint
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -7,7 +8,7 @@ from django.shortcuts import render
 
 from gazzola.database_getters import get_toppings_from_db
 from gazzola.database_helpers import get_pizza_with_real_price, get_pizzeria_names, get_order_history_for_user, \
-    get_address_for_user
+    get_address_for_user, place_order
 from gazzola.database_populater import populate
 from gazzola.database_setters import create_customer
 
@@ -40,7 +41,6 @@ def login_view(request):
 
 def pizzeria_view(request):
     if 'pizzeria' in request.session:
-        logging.debug(request)
         return render(request, 'pizzeria.html', {'pizzas': get_pizza_with_real_price(),
                                                  'toppings': get_toppings_from_db()})
     else:
@@ -56,7 +56,23 @@ def index_content_view(request):
 @login_required
 def place_order_view(request):
     if 'pizzeria' in request.session:
-        logging.debug(get_address_for_user(request.user))
+        if request.POST:
+            address_id = request.POST['address']
+            delivery_type = request.POST['delivery_type']
+            additional_info = request.POST['additional_info']
+
+            result = place_order(request.user, request.session['pizzeria'], request.session['cart'], address_id,
+                                 delivery_type, additional_info)
+
+            if result[0] == 0:
+                return render(request, 'order_summary.html', {'order': result[1], 'timer': randint(30, 60)})
+            elif result[0] == 3:
+                return render(request, 'order.html', {'addresses': get_address_for_user(request.user),
+                                                      'status': result[0], 'missing_toppings': result[1]})
+            else:
+                return render(request, 'order.html', {'addresses': get_address_for_user(request.user),
+                                                      'status': result[0], 'message': result[1]})
+
         return render(request, 'order.html', {'addresses': get_address_for_user(request.user)})
     else:
         return HttpResponseRedirect('/')

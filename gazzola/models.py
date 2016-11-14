@@ -101,14 +101,15 @@ class Promo(models.Model):
 class OrderedPizza(models.Model):
     toppings = models.ManyToManyField(Topping)
     size = models.PositiveIntegerField(validators=[MaxValueValidator(4)])
+    pizza_name = models.CharField(max_length=32)
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.pizza_name)
 
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer)
-    pizza = models.ForeignKey(OrderedPizza)
+    pizzas = models.ManyToManyField(OrderedPizza)
     address = models.ForeignKey(Address)
     additional_info = models.CharField(max_length=128)
     order_date = models.DateField()
@@ -117,4 +118,4 @@ class Order(models.Model):
         return self.customer.name + ' ' + self.customer.surname
 
     def __str__(self):
-        return self.print_customer() + ' (' + self.order_date + ')'
+        return self.print_customer() + ' (' + str(self.order_date) + ')'

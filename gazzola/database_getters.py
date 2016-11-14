@@ -1,4 +1,4 @@
-from gazzola.models import Pizza, Topping, Pizzeria, Order, Customer, Address
+from gazzola.models import Pizza, Topping, Pizzeria, Order, Customer, Address, Storeroom
 
 
 def get_pizzas_from_db():
@@ -50,4 +50,20 @@ def get_addresses_for_customer_from_db(customer):
 
     if address:
         return address
+    return None
+
+
+def get_pizzeria_by_name_from_db(pizzeria_name):
+    pizzeria = Pizzeria.objects.filter(name=pizzeria_name)
+
+    if pizzeria:
+        return pizzeria[0]
+    return None
+
+
+def get_address_by_id_from_db(address_id):
+    address = Address.objects.filter(pk=address_id)
+
+    if address:
+        return address[0]
     return None
