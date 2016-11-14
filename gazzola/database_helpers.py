@@ -2,7 +2,7 @@ from gazzola.database_getters import get_topping_from_db, get_pizza_from_db, get
     get_customer_for_user_from_db, get_orders_for_customer_from_db, get_addresses_for_customer_from_db
 
 
-def count_pizza_price(pizza_name, pizza_toppings):
+def count_pizza_price(pizza_name, pizza_toppings, pizza_size):
     pizza_db = get_pizza_from_db(pizza_name)
 
     price = 0
@@ -13,6 +13,15 @@ def count_pizza_price(pizza_name, pizza_toppings):
 
             if topping_db:
                 price += topping_db.price
+        price = count_price_depending_on_size(pizza_size, price)
+    return price
+
+
+def count_price_depending_on_size(size, price):
+    if size == '1':
+        return float(price) * 0.75
+    elif size == '3':
+        return float(price) * 1.25
     return price
 
 

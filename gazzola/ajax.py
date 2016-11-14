@@ -1,4 +1,6 @@
 import json
+import logging
+
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from gazzola.database_helpers import count_pizza_price
@@ -8,11 +10,12 @@ from gazzola.database_helpers import count_pizza_price
 def save_basket_session(request):
     cart = None
     if request.is_ajax() and request.POST:
+        logging.debug(request.POST)
         pizza_name = request.POST['pizza_name']
         pizza_size = request.POST['pizza_size']
         pizza_toppings = request.POST.getlist('toppings[]')
 
-        price = count_pizza_price(pizza_name, pizza_toppings)
+        price = count_pizza_price(pizza_name, pizza_toppings, pizza_size)
         my_pizza = [pizza_name, pizza_size, pizza_toppings, str(price)]
 
         if 'cart' in request.session:

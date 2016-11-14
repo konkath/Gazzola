@@ -40,6 +40,7 @@ def login_view(request):
 
 def pizzeria_view(request):
     if 'pizzeria' in request.session:
+        logging.debug(request)
         return render(request, 'pizzeria.html', {'pizzas': get_pizza_with_real_price(),
                                                  'toppings': get_toppings_from_db()})
     else:
