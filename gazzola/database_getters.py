@@ -1,4 +1,4 @@
-from gazzola.models import Pizza, Topping, Pizzeria, Order, Customer, Address, Storeroom
+from gazzola.models import Pizza, Topping, Pizzeria, Order, Customer, Address
 
 
 def get_pizzas_from_db():

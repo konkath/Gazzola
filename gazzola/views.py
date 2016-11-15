@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 
-from gazzola.database_getters import get_toppings_from_db, get_pizzeria_by_name_from_db
+from gazzola.database_getters import get_toppings_from_db
 from gazzola.database_helpers import get_pizza_with_real_price, get_pizzeria_names, get_order_history_for_user, \
     get_address_for_user, place_order
 from gazzola.database_populater import populate
@@ -57,7 +57,7 @@ def index_content_view(request):
 def place_order_view(request):
     if 'pizzeria' in request.session:
         if request.POST:
-            address_id = request.POST.get('address', "")
+            address_id = request.POST.get('address', '')
             delivery_type = request.POST['delivery_type']
             additional_info = request.POST['additional_info']
 
@@ -90,7 +90,6 @@ def place_order_view(request):
 
 def register_view(request):
     if request.POST:
-        logging.debug(request.POST)
         name = request.POST['name']
         surname = request.POST['surname']
         email = request.POST['email']
