@@ -114,6 +114,11 @@ function fillCart(data) {
     var table = document.getElementById("cart").getElementsByTagName("tbody")[0];
     var price = 0;
 
+    if (data.length > 0) {
+        $("#place-order-link").removeClass("disabled");
+        $("#clear-cart-button").removeClass("disabled");
+    }
+
     $(data).each(function (index, item) {
 
         var row = table.insertRow(table.rows.length);
@@ -151,6 +156,8 @@ function clearCart() {
         success: function () {
             document.getElementById("cart").getElementsByTagName("tbody")[0].innerHTML = "";
             $("#total-price").text("0 zł");
+            $("#place-order-link").addClass("disabled");
+            $("#clear-cart-button").addClass("disabled");
         }
     });
 }

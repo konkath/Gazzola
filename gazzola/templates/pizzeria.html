@@ -65,7 +65,7 @@
 
 <!-- Okno koszyka -->
 {% block cart %}
-<div class="table-responsive" style="position:fixed; margin-top: 70px;">
+<div class="table-responsive col-md-3" style="position:fixed; margin-top: 70px;">
     <table id="cart" class="table">
         <thead>
         <tr>
@@ -77,8 +77,8 @@
         <tbody></tbody>
 
     </table>
-    Razem: <span id="total-price"></span><br/>
-    <a href="/place_order">Zamawiam</a>
-    <input type="button" value="Wyczyść koszyk" onclick="clearCart();">
+    <p class="text-danger">Razem: <span id="total-price">0 zł</span></p>
+    <a id="place-order-link" class="btn btn-success disabled" href="/place_order">Zamawiam</a>
+    <input id="clear-cart-button" class="btn btn-xs btn-primary disabled" type="button" value="Wyczyść koszyk" onclick="clearCart();">
 </div>
 {% endblock %}

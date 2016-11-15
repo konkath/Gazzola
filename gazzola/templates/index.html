@@ -4,11 +4,12 @@
 <div class="content">
     {% csrf_token %}
     <div class="table-responsive">
+        <h2 class="text-center text-info">Wybierz pizzerię</h2>
         <table class="table">
             <tbody>
             <tr>
                 {% for pizzeria in pizzerias %}
-                <td onclick="choosePizzeria('{{pizzeria}}');">{{ pizzeria }}</td>
+                <td class="click-cell text-center" onclick="choosePizzeria('{{pizzeria}}');">{{ pizzeria }}</td>
                 {% if forloop.counter|divisibleby:5 %}
             </tr>
             <tr>{% endif %}
