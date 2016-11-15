@@ -10,7 +10,7 @@ from gazzola.database_getters import get_toppings_from_db
 from gazzola.database_helpers import get_pizza_with_real_price, get_pizzeria_names, get_order_history_for_user, \
     get_address_for_user, place_order
 from gazzola.database_populater import populate
-from gazzola.database_setters import create_customer
+from gazzola.database_setters import create_customer, create_address
 
 
 def login_view(request):
@@ -60,6 +60,16 @@ def place_order_view(request):
             address_id = request.POST['address']
             delivery_type = request.POST['delivery_type']
             additional_info = request.POST['additional_info']
+
+            if delivery_type == 'delivery' and address_id == '':
+                city = request.POST['city']
+                postal_code = request.POST['postal_code']
+                street = request.POST['street']
+                house_number = request.POST['house_number']
+                apt_number = request.POST['apt_number']
+
+                address = create_address(city, house_number, street, postal_code, apt_number)
+                address_id = address.id
 
             result = place_order(request.user, request.session['pizzeria'], request.session['cart'], address_id,
                                  delivery_type, additional_info)

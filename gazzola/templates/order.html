@@ -12,11 +12,11 @@
                 <label class="col-md-4 control-label" for="delivery_type">Sposób dostawy</label>
                 <div class="col-md-4" id="delivery_type" style="margin-left: 20px;">
                     <label class="radio" for="delivery_type-0">
-                        <input type="radio" name="delivery_type" id="delivery_type-0" value="delivery" checked="">
+                        <input onclick="changeDelivery();" type="radio" name="delivery_type" id="delivery_type-0" value="delivery" checked="">
                         Dostawa
                     </label>
                     <label class="radio" for="delivery_type-1">
-                        <input type="radio" name="delivery_type" id="delivery_type-1" value="takeout">
+                        <input onclick="changeDelivery();" type="radio" name="delivery_type" id="delivery_type-1" value="takeout">
                         Odbiór w lokalu
                     </label>
                 </div>
@@ -25,12 +25,48 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="address">Adres dostawy</label>
                 <div class="col-md-4">
-                    <select id="address" name="address" class="form-control">
+                    <select onchange="addressSelected();" id="address" name="address" class="form-control">
+                        <option value="">Wybierz adres</option>
                         {% for address in addresses %}
                         <option value="{{address.id}}"> {{ address }}
                         </option>
                         {% endfor %}
                     </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="city">Miasto</label>
+                <div class="col-md-4">
+                    <input id="city" name="city" type="text" placeholder="" class="form-control input-md address-field">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="postal-code">Kod pocztowy (int)</label>
+                <div class="col-md-4">
+                    <input id="postal-code" name="postal_code" type="text" placeholder="" class="form-control input-md address-field">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="street">Ulica</label>
+                <div class="col-md-4">
+                    <input id="street" name="street" type="text" placeholder="" class="form-control input-md address-field">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="house-number">Numer domu</label>
+                <div class="col-md-4">
+                    <input id="house-number" name="house_number" type="text" placeholder="" class="form-control input-md address-field">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="apt-number">Numer mieszkania</label>
+                <div class="col-md-4">
+                    <input id="apt-number" name="apt_number" type="text" placeholder="" class="form-control input-md address-field">
                 </div>
             </div>
 

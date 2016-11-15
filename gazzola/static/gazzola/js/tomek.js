@@ -177,3 +177,18 @@ function choosePizzeria(pizzeriaName) {
     });
 }
 
+function addressSelected() {
+
+    var isAddressChosen = $("#address").val() != '';
+
+    $(".address-field").attr("disabled", isAddressChosen);
+}
+
+function changeDelivery() {
+
+    var isTakeout = $("input:checked").val() == "takeout";
+
+    $(".address-field").attr("disabled", isTakeout);
+    $("#address").attr("disabled", isTakeout);
+
+}
