@@ -182,6 +182,7 @@ function addressSelected() {
     var isAddressChosen = $("#address").val() != '';
 
     $(".address-field").attr("disabled", isAddressChosen);
+    $(".address-field").prop("required", !isAddressChosen)
 }
 
 function changeDelivery() {
