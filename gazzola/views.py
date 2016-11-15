@@ -57,9 +57,7 @@ def index_content_view(request):
 def place_order_view(request):
     if 'pizzeria' in request.session:
         if request.POST:
-            pizzeria_name = request.session['pizzeria']
-            pizzeria_address_id = get_pizzeria_by_name_from_db(pizzeria_name).address.id
-            address_id = request.POST.get('address', pizzeria_address_id)
+            address_id = request.POST.get('address', "")
             delivery_type = request.POST['delivery_type']
             additional_info = request.POST['additional_info']
 
