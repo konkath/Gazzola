@@ -107,7 +107,7 @@ def place_order(user, pizzeria_name, basket, address_id, delivery_type, addition
             if topping in toppings:
                 toppings[topping] -= 1
 
-                if toppings[topping]:
+                if toppings[topping] < 0:
                     missing_toppings.append(topping)
 
     if missing_toppings:
