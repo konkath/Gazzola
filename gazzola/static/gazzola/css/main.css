@@ -1,0 +1,16 @@
+.click-cell:hover {
+    background-color: #9f9f9f;
+    cursor: pointer;
+}
+
+.click-cell {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+#toppingsDialog {
+    display: none;
+}

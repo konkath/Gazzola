@@ -123,12 +123,12 @@ function fillCart(data) {
 
         cell1.innerHTML = item[0];
         cell2.innerHTML = sizeToText(item[1]);
-        cell3.innerHTML = item[3];
+        cell3.innerHTML = parseFloat(item[3]).toFixed(2);
 
         price += item[3] / 1;
     });
-    console.log(price);
-    $("#total-price").text(price + " zł");
+
+    $("#total-price").text(parseFloat(price).toFixed(2) + " zł");
 }
 
 function refreshCart() {
@@ -150,6 +150,7 @@ function clearCart() {
         url: '/ajax/delete_basket_session/',
         success: function () {
             document.getElementById("cart").getElementsByTagName("tbody")[0].innerHTML = "";
+            $("#total-price").text("0 zł");
         }
     });
 }

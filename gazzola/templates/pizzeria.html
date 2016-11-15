@@ -21,9 +21,9 @@
                 <tr>
                     <th>Pizza</th>
                     <th>Składniki</th>
-                    <th>Mała</th>
-                    <th>Średnia</th>
-                    <th>Duża</th>
+                    <th class="text-center">Mała</th>
+                    <th class="text-center">Średnia</th>
+                    <th class="text-center">Duża</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,9 +35,9 @@
                         {{ topping.name }}{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </td>
-                    <td onclick="addSmall('{{pizza.pizza_name}}')">{{ pizza.price|mul:0.75|floatformat:2 }}</td>
-                    <td onclick="addNormal('{{pizza.pizza_name}}')">{{ pizza.price }}</td>
-                    <td onclick="addBig('{{pizza.pizza_name}}')">{{ pizza.price|mul:1.25|floatformat:2 }}</td>
+                    <td class="click-cell text-center" onclick="addSmall('{{pizza.pizza_name}}')">{{ pizza.price|mul:0.75|floatformat:2 }}</td>
+                    <td class="click-cell text-center" onclick="addNormal('{{pizza.pizza_name}}')">{{ pizza.price }}</td>
+                    <td class="click-cell text-center" onclick="addBig('{{pizza.pizza_name}}')">{{ pizza.price|mul:1.25|floatformat:2 }}</td>
                 </tr>
                 {% endfor %}
 
@@ -48,14 +48,14 @@
 </div>
 
 <!-- Okno dialogowe wyboru dodatków -->
-<div style="display:none;" id="toppingsDialog" title="Wybierz dodatki">
+<div id="toppingsDialog" title="Wybierz dodatki">
     <table class="table">
         {% for topping in toppings %}
         <tr>
             <td class="topping-name">{{topping.name}}</td>
             <td>0</td>
-            <td onclick="addTopping(this)">+</td>
-            <td onclick="removeTopping(this)">-</td>
+            <td class="click-cell text-center" onclick="addTopping(this)">+</td>
+            <td class="click-cell text-center" onclick="removeTopping(this)">-</td>
         </tr>
         {% endfor %}
     </table>
