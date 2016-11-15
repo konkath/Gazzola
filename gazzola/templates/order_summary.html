@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
 {% block main %}
-    <h1>Lubie placki</h1>
+<div>Twoje zamówienie będzie u Ciebie przed upływem tego czasu: <span id="time"></span></div>
+<script type="text/javascript">
+    var minutes = 60 * '{{timer}}';
+    var display = document.querySelector('#time');
+    startTimer(minutes, display);
+</script>
 {% endblock %}
