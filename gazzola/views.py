@@ -111,8 +111,8 @@ def register_view(request):
 
 @login_required
 def user_panel_view(request):
-    logging.debug(request.user)
-    return render(request, 'user_panel.html', {'order_history': get_order_history_for_user(request.user)})
+    return render(request, 'user_panel.html', {'order_history': get_order_history_for_user(request.user),
+                                               'addresses': get_address_for_user(request.user)})
 
 
 @login_required
