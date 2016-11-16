@@ -1,1 +1,102 @@
 {% extends "base.html" %}
+
+{% block main %}
+<section id="edit_address">
+    {% csrf_token %}
+    <form class="form-horizontal" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Edycja danych</legend>
+
+            <div id="address-chooser">
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="address">Adres</label>
+                    <div class="col-md-4">
+                        <select onchange="addressSelected();" id="address" name="address" class="form-control">
+                            {% for address in addresses %}
+                            <option value="{{address.id}}"> {{ address }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="street">Ulica</label>
+                <div class="col-md-4">
+                    <input id="street" name="street" type="text" placeholder="" class="form-control input-md"
+                           value="Ulica">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="house_number">Numer domu</label>
+                <div class="custom-address-inputs col-md-1" style="width: 80px">
+                    <input id="house_number" name="house_number" type="number" placeholder="" value="66"
+                           class="form-control input-md" required="">
+                </div>
+                <label class="col-md-2 control-label" for="apt_number">Numer lokalu</label>
+                <div class="custom-address-inputs col-md-1" style="width: 80px">
+                    <input id="apt_number" name="apt_number" type="number" placeholder="" value="66"
+                           class="form-control input-md">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="postal_code">Kod pocztowy</label>
+                <div class="col-md-2">
+                    <input id="postal_code" name="postal_code" type="number" placeholder="" value="12345"
+                           class="form-control input-md" required="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="city">Miasto</label>
+                <div class="col-md-4">
+                    <input id="city" name="city" type="text" placeholder="" class="form-control input-md" value="Miasto"
+                           required="">
+                </div>
+            </div>
+
+            <div class="span7 text-center">
+                <input type="submit" value="Zapisz" class="btn btn-primary"/>
+            </div>
+        </fieldset>
+    </form>
+</section>
+
+<section id="order_history">
+    <legend>Historia zamówień</legend>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Data</th>
+                <th>Zamówienie</th>
+                <th>Adres dostawy</th>
+                <th>Komentarz</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in order_history %}
+            <tr>
+                <td>{{ order.order_date }}</td>
+                <td>{% for pizza in order.pizzas.all %}
+                {{ pizza }}<br>
+                    {%endfor%}
+                </td>
+                <td>{{ order.address }}</td>
+                <td>{{ order.additional_info }}</td>
+                <td><!-- TODO Jarek opinia --></td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
