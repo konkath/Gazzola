@@ -180,16 +180,22 @@ function choosePizzeria(pizzeriaName) {
 function addressSelected() {
 
     var isAddressChosen = $("#address").val() != '';
-
-    $(".address-field").attr("disabled", isAddressChosen);
+    if (isAddressChosen) {
+        $("#new-address").hide(300);
+    } else {
+        $("#new-address").show(300);
+    }
 }
 
 function changeDelivery() {
 
     var isTakeout = $("input:checked").val() == "takeout";
 
-    $(".address-field").attr("disabled", isTakeout);
-    $("#address").attr("disabled", isTakeout);
+    if (isTakeout) {
+        $("#address-chooser").hide(300);
+    } else {
+        $("#address-chooser").show(300);
+    }
 }
 
 function startTimer(duration, display) {
