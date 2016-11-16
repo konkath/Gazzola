@@ -231,3 +231,11 @@ function addComment(order_id) {
         .data("order_id", order_id)
         .dialog();
 }
+
+function addressEditSelected() {
+
+    var selected = $("#address").val();
+
+    $("form:visible").addClass("hidden");
+    $("#" + selected).removeClass("hidden");
+}

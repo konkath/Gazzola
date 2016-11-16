@@ -1,27 +1,38 @@
 {% extends "base.html" %}
 
+{% block headscript %}
+<script>
+    $(document).ready(function () {
+        console.log("asfa");
+        $("#bs-example-navbar-collapse-1 .navbar-right li:eq(0)").before('<li><a href="#edit_address">Edycja adresów</a></li>');
+        $("#bs-example-navbar-collapse-1 .navbar-right li:eq(0)").before('<li><a href="#order_history">Historia zamówień</a></li>');
+    })
+</script>
+{% endblock %}
+
 {% block main %}
 <section id="edit_address">
     {% csrf_token %}
+    <legend>Edycja danych</legend>
     <div id="address-chooser">
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="address">Adres</label>
-                    <div class="col-md-4">
-                        <select onchange="addressSelected();" id="address" name="address" class="form-control">
-                            {% for address in addresses %}
-                            <option value="{{address.id}}"> {{ address }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="address">Adres</label>
+            <div class="col-md-4">
+                <select onchange="addressEditSelected();" id="address" name="address" class="form-control">
+                    {% for address in addresses %}
+                    <option value="{{address.id}}"> {{ address }}
+                    </option>
+                    {% endfor %}
+                </select>
             </div>
+        </div>
+    </div>
     <br><br><br>
     {% for address in addresses %}
-    <form id="{{address.id}}" class="form-horizontal" method="post">
+    <form id="{{address.id}}" class="address-form form-horizontal {% if forloop.counter != 1 %}hidden{% endif %}" method="post">
         {% csrf_token %}
+        <input type="hidden" name="address_id" value="{{address.id}}"/>
         <fieldset>
-            <legend>Edycja danych</legend>
 
             <div class="form-group">
                 <label class="col-md-4 control-label" for="street">Ulica</label>

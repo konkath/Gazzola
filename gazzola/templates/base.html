@@ -12,6 +12,7 @@
     <link href='{% static "gazzola/css/bootstrap.min.css" %}' rel="stylesheet">
     <link href='{% static "gazzola/css/freelancer.css" %}' rel="stylesheet">
     <link href='{% static "gazzola/css/jquery-ui.min.css" %}' rel="stylesheet">
+    <link href='{% static "gazzola/css/freelancer.min.css" %}' rel="stylesheet">
     <link href='{% static "gazzola/css/main.css" %}' rel="stylesheet">
     <script src='{% static "gazzola/js/jquery.js" %}'></script>
     <script src='{% static "gazzola/js/jquery.ui.js" %}'></script>
@@ -48,15 +49,11 @@
 
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
+                <li><a href="/user_panel">User panel</a></li>
                 <li><a href="/logout">Logout</a></li>
                 {% else %}
                 <li><a href="/register">Register</a></li>
                 <li><a href="/login">Login</a></li>
-                {% endif %}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                <li><a href="/user_panel">User panel</a></li>
                 {% endif %}
             </ul>
         </div>
