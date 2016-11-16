@@ -224,3 +224,10 @@ function startTimer(duration, display) {
         }
     }, 1000);
 }
+
+function addComment(order_id) {
+
+    $("#commentDialog")
+        .data("order_id", order_id)
+        .dialog();
+}

@@ -86,12 +86,13 @@
             <tr>
                 <td>{{ order.order_date }}</td>
                 <td>{% for pizza in order.pizzas.all %}
-                {{ pizza }}<br>
+                    {{ pizza }}<br>
                     {%endfor%}
                 </td>
                 <td>{{ order.address }}</td>
                 <td>{{ order.additional_info }}</td>
-                <td><!-- TODO Jarek opinia --></td>
+                <td><input onclick="addComment({{order.id}});" type="button" class="btn btn-xs btn-info" value="Dodaj opinię"></td>
+                </td>
             </tr>
             {% endfor %}
 
@@ -99,4 +100,10 @@
         </table>
     </div>
 </section>
+
+<div id="commentDialog" class="text-center" title="Skomentuj zamówienie">
+    <textarea class=" col-md-4 form-control" id="additional_info" name="additional_info" style="resize: none"></textarea>
+    <!-- TODO dorobic funkcjonalnosc wstawiania komentarza -->
+    <input type="button" class="btn btn-info" value="Dodaj komentarz" onclick="">
+</div>
 {% endblock %}
