@@ -81,16 +81,21 @@
                 </div>
             </div>
 
-
             <div class="span7 text-center">
                 <input type="submit" value="Złóż zamówienie" class="btn btn-primary"/>
             </div>
-
 
         </fieldset>
     </form>
 </div>
 <script type="text/javascript">
 
+    $('#new-address-form').validate({
+        rules: {
+            postal_code: {
+                postal_code: true
+            }
+        }
+    })
 </script>
 {% endblock %}
