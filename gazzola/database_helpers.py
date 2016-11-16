@@ -1,7 +1,10 @@
+import logging
+
 from gazzola.database_getters import get_topping_from_db, get_pizza_from_db, get_pizzas_from_db,\
     get_pizzerias_from_db, get_customer_for_user_from_db, get_orders_for_customer_from_db, \
-    get_addresses_for_customer_from_db, get_pizzeria_by_name_from_db, get_address_by_id_from_db
-from gazzola.database_setters import create_ordered_pizza, create_order
+    get_addresses_for_customer_from_db, get_pizzeria_by_name_from_db, get_address_by_id_from_db, \
+    get_storage_by_id_from_db
+from gazzola.database_setters import create_ordered_pizza, create_order, update_topping_count_in_storage_db
 
 
 def count_pizza_price(pizza_name, pizza_toppings, pizza_size):
@@ -99,15 +102,16 @@ def place_order(user, pizzeria_name, basket, address_id, delivery_type, addition
 
     toppings = dict()
     for storage in pizzeria_db.storeroom.storage.all():
-        toppings[storage.topping.name] = storage.count
+        toppings[storage.topping.name] = [storage.count, storage.id]
 
     missing_toppings = []
     for item in basket:  # [pizza_name, pizza_size, pizza_toppings, str(price)]
         for topping in item[2]:
             if topping in toppings:
-                toppings[topping] -= 1
+                toppings[topping][0] -= 1
+                logging.debug(toppings[topping][0])
 
-                if toppings[topping] < 0:
+                if toppings[topping][0] < 0:
                     missing_toppings.append(topping)
 
     if missing_toppings:
@@ -127,4 +131,13 @@ def place_order(user, pizzeria_name, basket, address_id, delivery_type, addition
         ordered_pizzas.append(create_ordered_pizza(item[0], item[1], convert_string_topping_to_db(item[2])))
 
     order = create_order(customer_db[0], ordered_pizzas, address, additional_info)
+    update_toppings(toppings)
+
     return [0, order]
+
+
+def update_toppings(toppings):
+    for key, value in toppings.items():
+        storage_db = get_storage_by_id_from_db(value[1])
+        if storage_db:
+            update_topping_count_in_storage_db(storage_db, value[0])

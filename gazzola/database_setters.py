@@ -52,3 +52,8 @@ def create_order(customer, pizzas, address, additional_info):
         order.pizzas.add(pizza)
 
     return order
+
+
+def update_topping_count_in_storage_db(storage, topping_count):
+    storage.count = topping_count
+    storage.save()

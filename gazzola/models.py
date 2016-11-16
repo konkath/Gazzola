@@ -5,13 +5,13 @@ from django.contrib.auth.models import User
 
 class Address(models.Model):
     city = models.CharField(max_length=64)
-    postal_code = models.PositiveIntegerField(validators=[MaxValueValidator(99999)])
+    postal_code = models.CharField(max_length=6)
     street = models.CharField(max_length=64, null=True)
     house_number = models.CharField(max_length=4)
     apt_number = models.CharField(max_length=4, null=True)
 
     def __str__(self):
-        addr = self.city + '(' + str(self.postal_code) + ') '
+        addr = self.city + '(' + self.postal_code + ') '
         if self.street:
             addr += self.street + ' '
         addr += str(self.house_number)
