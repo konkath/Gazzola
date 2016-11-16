@@ -8,6 +8,10 @@ $.ajaxSetup({
     }
 });
 
+jQuery.validator.addMethod('postal_code', function (value, element) {
+    return this.optional(element) || !!value.trim().match(/^[0-9]{2}-[0-9]{3}$/);
+}, 'Invalid postal code');
+
 function addTopping(cell) {
 
     $(cell).parent().children().get(1).innerHTML = $(cell).parent().children().get(1).innerHTML / 1 + 1;
@@ -182,8 +186,10 @@ function addressSelected() {
     var isAddressChosen = $("#address").val() != '';
     if (isAddressChosen) {
         $("#new-address").hide(300);
+        $(".address-field").removeAttr("required");
     } else {
         $("#new-address").show(300);
+        $(".address-field").attr("required", true);
     }
 }
 
@@ -193,8 +199,10 @@ function changeDelivery() {
 
     if (isTakeout) {
         $("#address-chooser").hide(300);
+        $(".address-field").removeAttr("required");
     } else {
         $("#address-chooser").show(300);
+        $(".address-field").attr("required");
     }
 }
 

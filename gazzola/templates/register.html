@@ -71,8 +71,8 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="postal_code">Kod pocztowy</label>
                 <div class="col-md-2">
-                    <input id="postal_code" name="postal_code" type="number" placeholder=""
-                           class="form-control input-md" required="">
+                    <input id="postal_code" name="postal_code" type="text" placeholder=""
+                           class="form-control input-md postal_code" required="">
                 </div>
             </div>
 
@@ -97,6 +97,7 @@
     {% endif %}
 </div>
 <script type="text/javascript">
+
     $('#registerForm').validate({
         rules: {
             password_repeat: {
