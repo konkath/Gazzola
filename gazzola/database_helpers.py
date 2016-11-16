@@ -1,6 +1,6 @@
-from gazzola.database_getters import get_topping_from_db, get_pizza_from_db, get_pizzas_from_db, get_pizzerias_from_db, \
-    get_customer_for_user_from_db, get_orders_for_customer_from_db, get_addresses_for_customer_from_db, \
-    get_pizzeria_by_name_from_db, get_address_by_id_from_db
+from gazzola.database_getters import get_topping_from_db, get_pizza_from_db, get_pizzas_from_db,\
+    get_pizzerias_from_db, get_customer_for_user_from_db, get_orders_for_customer_from_db, \
+    get_addresses_for_customer_from_db, get_pizzeria_by_name_from_db, get_address_by_id_from_db
 from gazzola.database_setters import create_ordered_pizza, create_order
 
 
@@ -128,4 +128,3 @@ def place_order(user, pizzeria_name, basket, address_id, delivery_type, addition
 
     order = create_order(customer_db[0], ordered_pizzas, address, additional_info)
     return [0, order]
-
