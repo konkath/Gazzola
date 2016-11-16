@@ -15,6 +15,7 @@
     <link href='{% static "gazzola/css/main.css" %}' rel="stylesheet">
     <script src='{% static "gazzola/js/jquery.js" %}'></script>
     <script src='{% static "gazzola/js/jquery.ui.js" %}'></script>
+    <script src='{% static "gazzola/js/jquery.validate.min.js" %}'></script>
     <script src='{% static "gazzola/js/bootstrap.min.js" %}'></script>
     <script src='{% static "gazzola/js/tomek.js" %}'></script>
 
@@ -47,6 +48,7 @@
                 {% if user.is_authenticated %}
                 <li><a href="/logout">Logout</a></li>
                 {% else %}
+                <li><a href="/register">Register</a></li>
                 <li><a href="/login">Login</a></li>
                 {% endif %}
             </ul>

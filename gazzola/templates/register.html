@@ -1,101 +1,111 @@
 {% extends "base.html" %}
 {% block main %}
 <div class="content">
-    <section id="register_form">
-        <form class="form-horizontal" method="post">
-            {% csrf_token %}
-            <fieldset>
-                <legend>Rejestracja</legend>
+    <form id="registerForm" class="form-horizontal" method="post" data-toggle="validator">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Rejestracja</legend>
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="email">Email</label>
-                    <div class="col-md-4">
-                        <input id="email" name="email" type="text" placeholder="" class="form-control input-md"
-                               required="">
-                    </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email</label>
+                <div class="col-md-4">
+                    <input id="email" name="email" type="text" placeholder="" class="form-control input-md"
+                           required="">
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="password">Hasło</label>
-                    <div class="col-md-4">
-                        <input id="password" name="password" type="password" placeholder=""
-                               class="form-control input-md" required="">
-                    </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="password">Hasło</label>
+                <div class="col-md-4">
+                    <input id="password" name="password" type="password" placeholder=""
+                           class="form-control input-md" required="">
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="password_repeat">Powtórz hasło</label>
-                    <div class="col-md-4">
-                        <input id="password_repeat" name="password_repeat" type="password" placeholder=""
-                               class="form-control input-md" required="">
-                    </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="password_repeat">Powtórz hasło</label>
+                <div class="col-md-4">
+                    <input data-match="#password" id="password_repeat" name="password_repeat" type="password" placeholder=""
+                           class="form-control input-md" required="">
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="name">Imię</label>
-                    <div class="col-md-4">
-                        <input id="name" name="name" type="text" placeholder="" class="form-control input-md"
-                               required="">
-                    </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Imię</label>
+                <div class="col-md-4">
+                    <input id="name" name="name" type="text" placeholder="" class="form-control input-md"
+                           required="">
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="surname">Nazwisko</label>
-                    <div class="col-md-4">
-                        <input id="surname" name="surname" type="text" placeholder="" class="form-control input-md"
-                               required="">
-                    </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="surname">Nazwisko</label>
+                <div class="col-md-4">
+                    <input id="surname" name="surname" type="text" placeholder="" class="form-control input-md"
+                           required="">
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="street">Ulica</label>
-                    <div class="col-md-4">
-                        <input id="street" name="street" type="text" placeholder="" class="form-control input-md">
-                    </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="street">Ulica</label>
+                <div class="col-md-4">
+                    <input id="street" name="street" type="text" placeholder="" class="form-control input-md">
                 </div>
+            </div>
 
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="house_number">Numer domu</label>
-                    <div class="custom-address-inputs col-md-1" style="width: 80px">
-                        <input id="house_number" name="house_number" type="number" placeholder=""
-                               class="form-control input-md" required="">
-                    </div>
-                    <label class="col-md-2 control-label" for="apt_number">Numer lokalu</label>
-                    <div class="custom-address-inputs col-md-1" style="width: 80px">
-                        <input id="apt_number" name="apt_number" type="number" placeholder=""
-                               class="form-control input-md">
-                    </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="house_number">Numer domu</label>
+                <div class="custom-address-inputs col-md-1" style="width: 80px">
+                    <input id="house_number" name="house_number" type="number" placeholder=""
+                           class="form-control input-md" required="">
                 </div>
-
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="postal_code">Kod pocztowy</label>
-                    <div class="col-md-2">
-                        <input id="postal_code" name="postal_code" type="number" placeholder=""
-                               class="form-control input-md" required="">
-                    </div>
+                <label class="col-md-2 control-label" for="apt_number">Numer lokalu</label>
+                <div class="custom-address-inputs col-md-1" style="width: 80px">
+                    <input id="apt_number" name="apt_number" type="number" placeholder=""
+                           class="form-control input-md">
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="city">Miasto</label>
-                    <div class="col-md-4">
-                        <input id="city" name="city" type="text" placeholder="" class="form-control input-md"
-                               required="">
-                    </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="postal_code">Kod pocztowy</label>
+                <div class="col-md-2">
+                    <input id="postal_code" name="postal_code" type="number" placeholder=""
+                           class="form-control input-md" required="">
                 </div>
+            </div>
 
-                <div class="span7 text-center">
-                    <input type="submit" value="Zarejestruj" class="btn btn-primary"/>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="city">Miasto</label>
+                <div class="col-md-4">
+                    <input id="city" name="city" type="text" placeholder="" class="form-control input-md"
+                           required="">
                 </div>
+            </div>
 
-            </fieldset>
-        </form>
-        {% if register_status == 1 %}
-        Zarejestrowany
-        {% elif register_status == 0%}
-        Niezarejestrowany
-        {% endif %}
-    </section>
+            <div class="span7 text-center">
+                <input type="submit" value="Zarejestruj" class="btn btn-primary"/>
+            </div>
+
+        </fieldset>
+    </form>
+    {% if register_status == 1 %}
+    Zarejestrowany
+    {% elif register_status == 0%}
+    Niezarejestrowany
+    {% endif %}
 </div>
+<script type="text/javascript">
+    $('#registerForm').validate({
+        rules: {
+            password_repeat: {
+                equalTo: "#password"
+            },
+            email: {
+                email: true
+            }
+        }
+    })
+</script>
 {% endblock %}
