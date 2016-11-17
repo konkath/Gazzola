@@ -71,8 +71,7 @@ def place_order_view(request):
                 address = create_address(city, house_number, street, postal_code, apt_number)
                 address_id = address.id
 
-            result = place_order(request.user, request.session['pizzeria'], request.session['cart'], address_id,
-                                 delivery_type, additional_info)
+            result = place_order(request, address_id, delivery_type, additional_info)
 
             if result[0] == 0:
                 return render(request, 'order_summary.html', {'order': result[1], 'timer': randint(30, 60)})
