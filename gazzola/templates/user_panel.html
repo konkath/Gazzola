@@ -95,7 +95,12 @@
                 </td>
                 <td>{{ order.address }}</td>
                 <td>{{ order.additional_info }}</td>
-                <td><input onclick="addComment({{order.id}});" type="button" class="btn btn-xs btn-info" value="Dodaj opinię"></td>
+                <td>{% if not order.review %}
+                        <input onclick="addComment({{order.id}});" type="button" class="btn btn-xs btn-info" value="Dodaj opinię">
+                    {% else %}
+                        {{ order.review }}
+                    {% endif %}
+                </td>
                 </td>
             </tr>
             {% endfor %}
