@@ -106,8 +106,11 @@
 </section>
 
 <div id="commentDialog" class="text-center" title="Skomentuj zamówienie">
-    <textarea class=" col-md-4 form-control" id="additional_info" name="additional_info" style="resize: none"></textarea>
-    <!-- TODO dorobic funkcjonalnosc wstawiania komentarza -->
-    <input type="button" class="btn btn-info" value="Dodaj komentarz" onclick="">
+    <form method="POST" action="/user_panel">
+        <input type="hidden" name="order_id"/>
+        <input type="hidden" name="rating" value="3"/>
+        <textarea class=" col-md-4 form-control" id="additional_info" name="additional_info" style="resize: none"></textarea>
+        <input type="submit" class="btn btn-info" value="Dodaj komentarz" onclick="">
+    </form>
 </div>
 {% endblock %}

@@ -227,9 +227,9 @@ function startTimer(duration, display) {
 
 function addComment(order_id) {
 
-    $("#commentDialog")
-        .data("order_id", order_id)
-        .dialog();
+    var dialog = $("#commentDialog");
+    dialog.find('input[name="order_id"]').val(order_id);
+    dialog.dialog();
 }
 
 function addressEditSelected() {
