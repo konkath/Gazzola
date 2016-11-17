@@ -91,7 +91,11 @@ def convert_string_topping_to_db(toppings):
     return toppings_db
 
 
-def place_order(user, pizzeria_name, basket, address_id, delivery_type, additional_info):
+def place_order(request, address_id, delivery_type, additional_info):
+    user = request.user
+    pizzeria_name = request.session['pizzeria']
+    basket = request.session['cart']
+
     pizzeria_db = get_pizzeria_by_name_from_db(pizzeria_name)
     if not pizzeria_db:
         return [1, pizzeria_name]
@@ -109,7 +113,6 @@ def place_order(user, pizzeria_name, basket, address_id, delivery_type, addition
         for topping in item[2]:
             if topping in toppings:
                 toppings[topping][0] -= 1
-                logging.debug(toppings[topping][0])
 
                 if toppings[topping][0] < 0:
                     missing_toppings.append(topping)
@@ -132,6 +135,7 @@ def place_order(user, pizzeria_name, basket, address_id, delivery_type, addition
 
     order = create_order(customer_db[0], ordered_pizzas, address, additional_info)
     update_toppings(toppings)
+    del request.session['cart']
 
     return [0, order]
 
