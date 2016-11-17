@@ -1,15 +1,5 @@
 {% extends "base.html" %}
 
-{% block headscript %}
-<script>
-    $(document).ready(function () {
-        console.log("asfa");
-        $("#bs-example-navbar-collapse-1 .navbar-right li:eq(0)").before('<li><a href="#edit_address">Edycja adresów</a></li>');
-        $("#bs-example-navbar-collapse-1 .navbar-right li:eq(0)").before('<li><a href="#order_history">Historia zamówień</a></li>');
-    })
-</script>
-{% endblock %}
-
 {% block main %}
 <section id="edit_address">
     {% csrf_token %}
