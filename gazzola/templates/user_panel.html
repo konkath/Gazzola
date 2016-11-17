@@ -82,7 +82,7 @@
                 <th>Zamówienie</th>
                 <th>Adres dostawy</th>
                 <th>Komentarz</th>
-                <th></th>
+                <th>Opinia</th>
             </tr>
             </thead>
             <tbody>
@@ -96,9 +96,9 @@
                 <td>{{ order.address }}</td>
                 <td>{{ order.additional_info }}</td>
                 <td>{% if not order.review %}
-                        <input onclick="addComment({{order.id}});" type="button" class="btn btn-xs btn-info" value="Dodaj opinię">
+                    <input onclick="addComment({{order.id}});" type="button" class="btn btn-xs btn-info" value="Dodaj opinię">
                     {% else %}
-                        {{ order.review }}
+                    {{ order.review }}
                     {% endif %}
                 </td>
                 </td>
@@ -114,11 +114,11 @@
     <form method="POST" action="/user_panel">
         {% csrf_token %}
         Ocena:
-        <input type="radio" name="value" value="1"/>1
-        <input type="radio" name="value" value="2"/>2
-        <input type="radio" name="value" value="3"/>3
-        <input type="radio" name="value" value="4"/>4
-        <input type="radio" name="value" value="5"/>5
+        <input type="radio" name="rating" value="1"/>1
+        <input type="radio" name="rating" value="2"/>2
+        <input type="radio" name="rating" value="3"/>3
+        <input type="radio" name="rating" value="4"/>4
+        <input type="radio" name="rating" value="5"/>5
         <input type="hidden" name="order_id"/>
         <textarea class=" col-md-4 form-control" id="additional_info" name="additional_info" style="resize: none"></textarea>
         <input type="submit" class="btn btn-info" value="Dodaj komentarz" onclick="">
