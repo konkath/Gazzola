@@ -1,10 +1,9 @@
-import logging
-
 from gazzola.database_getters import get_topping_from_db, get_pizza_from_db, get_pizzas_from_db,\
     get_pizzerias_from_db, get_customer_for_user_from_db, get_orders_for_customer_from_db, \
     get_addresses_for_customer_from_db, get_pizzeria_by_name_from_db, get_address_by_id_from_db, \
-    get_storage_by_id_from_db
-from gazzola.database_setters import create_ordered_pizza, create_order, update_topping_count_in_storage_db
+    get_storage_by_id_from_db, get_order_by_id_from_db
+from gazzola.database_setters import create_ordered_pizza, create_order, update_topping_count_in_storage_db, \
+    create_review_db, update_order_of_review_db
 
 
 def count_pizza_price(pizza_name, pizza_toppings, pizza_size):
@@ -145,3 +144,11 @@ def update_toppings(toppings):
         storage_db = get_storage_by_id_from_db(value[1])
         if storage_db:
             update_topping_count_in_storage_db(storage_db, value[0])
+
+
+def update_order_for_review(order_id, rating, review):
+    order = get_order_by_id_from_db(order_id)
+
+    if order:
+        review = create_review_db(rating=rating, review=review)
+        update_order_of_review_db(order=order, review=review)

@@ -75,3 +75,11 @@ def get_storage_by_id_from_db(storage_id):
     if storage:
         return storage[0]
     return None
+
+
+def get_order_by_id_from_db(order_id):
+    order = Order.objects.filter(pk=order_id)
+
+    if order:
+        return order[0]
+    return None

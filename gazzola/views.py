@@ -6,9 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 
-from gazzola.database_getters import get_toppings_from_db
+from gazzola.database_getters import get_toppings_from_db, get_customer_for_user_from_db
 from gazzola.database_helpers import get_pizza_with_real_price, get_pizzeria_names, get_order_history_for_user, \
-    get_address_for_user, place_order
+    get_address_for_user, place_order, update_order_for_review
 from gazzola.database_populater import populate
 from gazzola.database_setters import create_customer, create_address
 
@@ -110,6 +110,13 @@ def register_view(request):
 
 @login_required
 def user_panel_view(request):
+    if request.POST:
+        logging.debug(request.POST)
+        order_id = request.POST['order_id']
+        additional_info = request.POST['additional_info']
+        rating = request.POST['rating']
+
+        update_order_for_review(order_id, rating, additional_info)
     return render(request, 'user_panel.html', {'order_history': get_order_history_for_user(request.user),
                                                'addresses': get_address_for_user(request.user)})
 

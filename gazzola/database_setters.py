@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.contrib.auth.models import User
-from gazzola.models import Customer, Address, OrderedPizza, Order
+from gazzola.models import Customer, Address, OrderedPizza, Order, Review
 
 
 def create_customer(name, surname, email, password, city, house_number, street, postal_code, apt_number):
@@ -57,3 +57,15 @@ def create_order(customer, pizzas, address, additional_info):
 def update_topping_count_in_storage_db(storage, topping_count):
     storage.count = topping_count
     storage.save()
+
+
+def create_review_db(rating, review):
+    review = Review(rating=rating, review=review)
+    review.save()
+
+    return review
+
+
+def update_order_of_review_db(order, review):
+    order.review = review
+    order.save()

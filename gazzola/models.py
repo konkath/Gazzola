@@ -33,15 +33,11 @@ class Customer(models.Model):
 
 
 class Review(models.Model):
-    customer = models.ForeignKey(Customer)
     rating = models.IntegerField()
     review = models.CharField(max_length=255)
 
-    def print_customer(self):
-        return self.customer.name + ' ' + self.customer.surname
-
     def __str__(self):
-        return self.print_customer() + ' ' + str(self.rating)
+        return 'Ocena: ' + str(self.rating) + '. ' + self.review
 
 
 class Topping(models.Model):
@@ -113,6 +109,7 @@ class Order(models.Model):
     address = models.ForeignKey(Address)
     additional_info = models.CharField(max_length=128)
     order_date = models.DateField()
+    review = models.ForeignKey(Review, null=True)
 
     def print_customer(self):
         return self.customer.name + ' ' + self.customer.surname
