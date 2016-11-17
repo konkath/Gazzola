@@ -107,6 +107,7 @@
 
 <div id="commentDialog" class="text-center" title="Skomentuj zamówienie">
     <form method="POST" action="/user_panel">
+        {% csrf_token %}
         <input type="hidden" name="order_id"/>
         <input type="hidden" name="rating" value="3"/>
         <textarea class=" col-md-4 form-control" id="additional_info" name="additional_info" style="resize: none"></textarea>
