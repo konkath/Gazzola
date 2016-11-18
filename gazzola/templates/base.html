@@ -50,7 +50,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                 {% if request.path != "/user_panel" %}
-                <li><a href="/user_panel">User panel</a></li>
+                <li><a href="/user_panel">{{ request.user }}</a></li>
                 {% else %}
                 <li><a href="#edit_address">Edycja adresów</a></li>
                 <li><a href="#order_history">Historia zamówień</a></li>
