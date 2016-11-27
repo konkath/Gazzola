@@ -35,9 +35,15 @@
                         {{ topping.name }}{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </td>
-                    <td class="click-cell text-center" onclick="addSmall('{{pizza.pizza_name}}')">{{ pizza.price|mul:0.75|floatformat:2 }}</td>
-                    <td class="click-cell text-center" onclick="addNormal('{{pizza.pizza_name}}')">{{ pizza.price }}</td>
-                    <td class="click-cell text-center" onclick="addBig('{{pizza.pizza_name}}')">{{ pizza.price|mul:1.25|floatformat:2 }}</td>
+                    <td class="click-cell text-center" onclick="addSmall('{{pizza.pizza_name}}')">{{ pizza.price|mul:0.75|floatformat:2 }}
+                        <br/><a class="chose-pizza">(wybierz.)</a>
+                    </td>
+                    <td class="click-cell text-center" onclick="addNormal('{{pizza.pizza_name}}')">{{ pizza.price }}
+                        <br/><a class="chose-pizza">(wybierz..)</a>
+                    </td>
+                    <td class="click-cell text-center" onclick="addBig('{{pizza.pizza_name}}')">{{ pizza.price|mul:1.25|floatformat:2 }}
+                        <br/><a class="chose-pizza">(wybierz...)</a>
+                    </td>
                 </tr>
                 {% endfor %}
 
