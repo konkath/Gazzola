@@ -14,7 +14,7 @@
 <div class="content">
     {% csrf_token %}
     <section id="menu">
-        <h1>MENU</h1>
+        <h1 class="text-danger">MENU</h1>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -65,7 +65,7 @@
         </tr>
         {% endfor %}
     </table>
-    <input type="button" value="Dodaj do koszyka" onclick="addToCart();">
+    <input type="button" class="btn btn-danger" value="Dodaj do koszyka" onclick="addToCart();">
 </div>
 {% endblock %}
 

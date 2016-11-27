@@ -3,20 +3,20 @@
 {% block main %}
 <div class="content">
     {% csrf_token %}
-    <div class="table-responsive">
-        <h2 class="text-center text-info">Wybierz pizzerię</h2>
-        <table class="table">
-            <tbody>
-            <tr>
-                {% for pizzeria in pizzerias %}
-                <td class="click-cell text-center" onclick="choosePizzeria('{{pizzeria}}');">{{ pizzeria }}</td>
-                {% if forloop.counter|divisibleby:5 %}
-            </tr>
-            <tr>{% endif %}
-                {% endfor %}
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <!--<div class="table-responsive">-->
+    <h2 class="text-center text-danger">Wybierz pizzerię</h2>
+    <table class="table table-stripped">
+        <tbody>
+        <tr>
+            {% for pizzeria in pizzerias %}
+            <td class="click-cell text-center" onclick="choosePizzeria('{{pizzeria}}');">{{ pizzeria }}</td>
+            {% if forloop.counter|divisibleby:5 %}
+        </tr>
+        <tr>{% endif %}
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+    <!--</div>-->
 </div>
 {% endblock %}
