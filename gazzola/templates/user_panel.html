@@ -3,12 +3,12 @@
 {% block main %}
 <section id="edit_address">
     {% csrf_token %}
-    <legend>Edycja danych</legend>
+    <legend class="text-danger">Edycja danych</legend>
     <div id="address-chooser">
         <div class="form-group">
             <label class="col-md-4 control-label" for="address">Adres</label>
-            <div class="col-md-4">
-                <select onchange="addressEditSelected();" id="address" name="address" class="form-control">
+            <div class="col-md-5">
+                <select onchange="addressEditSelected();" id="address" name="address" class="form-control selectpicker" data-style="btn btn-primary">
                     {% for address in addresses %}
                     <option value="{{address.id}}"> {{ address }}
                     </option>
@@ -73,7 +73,7 @@
 </section>
 
 <section id="order_history">
-    <legend>Historia zamówień</legend>
+    <legend class="text-danger">Historia zamówień</legend>
     <div class="table-responsive">
         <table class="table">
             <thead>
